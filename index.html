@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Сайт-резюме Никиты Михайловича - Junior JavaScript Developer." />
+  <meta name="theme-color" content="#0a0d12" />
+  <title>Никита Михайлович - Junior JavaScript Developer</title>
+  <style>
+    :root {
+      --bg: #080a0f;
+      --bg-soft: #0d1118;
+      --panel: rgba(17, 22, 31, .78);
+      --panel-strong: #111722;
+      --text: #f5f7fb;
+      --muted: #98a3b5;
+      --line: rgba(255,255,255,.09);
+      --accent: #9dff5a;
+      --accent-2: #59d6ff;
+      --danger: #ff6c8a;
+      --shadow: 0 24px 70px rgba(0,0,0,.35);
+      --radius: 22px;
+      --max: 1180px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 80% 5%, rgba(157,255,90,.09), transparent 28%),
+        radial-gradient(circle at 10% 25%, rgba(89,214,255,.08), transparent 26%),
+        linear-gradient(180deg, #07090d 0%, #090c12 55%, #080a0f 100%);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+    .container { width: min(calc(100% - 40px), var(--max)); margin: 0 auto; }
+    .skip { position: fixed; left: 15px; top: 12px; z-index: 99; transform: translateY(-150%); background: var(--accent); color: #081006; padding: 10px 14px; border-radius: 12px; font-weight: 800; }
+    .skip:focus { transform: translateY(0); }
+
+    .nav-wrap { position: sticky; top: 0; z-index: 40; backdrop-filter: blur(18px); background: rgba(8,10,15,.72); border-bottom: 1px solid var(--line); }
+    nav { min-height: 74px; display:flex; align-items:center; justify-content:space-between; gap: 20px; }
+    .brand { display:flex; align-items:center; gap: 12px; font-weight: 800; letter-spacing: -.03em; }
+    .brand-mark { width: 36px; height: 36px; display:grid; place-items:center; border-radius: 11px; background: var(--accent); color:#091007; box-shadow: 0 0 0 5px rgba(157,255,90,.08); }
+    .nav-links { display:flex; align-items:center; gap: 7px; flex-wrap: wrap; justify-content: flex-end; }
+    .nav-links a { color: var(--muted); font-size: .9rem; padding: 8px 10px; border-radius: 10px; }
+    .nav-links a:hover, .nav-links a:focus-visible { color: var(--text); background: rgba(255,255,255,.06); outline:none; }
+
+    .hero { padding: 74px 0 34px; }
+    .hero-grid { display:grid; grid-template-columns: 1.35fr .65fr; gap: 26px; align-items: stretch; }
+    .hero-main, .hero-side, .section-card, .timeline-card { background: var(--panel); border: 1px solid var(--line); box-shadow: var(--shadow); backdrop-filter: blur(16px); }
+    .hero-main { border-radius: 30px; padding: 42px; position: relative; overflow:hidden; }
+    .hero-main::after { content:""; position:absolute; width:360px; height:360px; right:-170px; top:-180px; border-radius:50%; border:1px solid rgba(157,255,90,.18); box-shadow: 0 0 0 80px rgba(157,255,90,.025), 0 0 0 160px rgba(157,255,90,.018); pointer-events:none; }
+    .eyebrow { display:inline-flex; gap:8px; align-items:center; padding:7px 10px; border:1px solid rgba(157,255,90,.2); background: rgba(157,255,90,.07); border-radius:999px; color:var(--accent); text-transform:uppercase; letter-spacing:.13em; font-size:.68rem; font-weight:800; }
+    .status-dot { width:8px; height:8px; border-radius:50%; background:var(--accent); box-shadow: 0 0 12px var(--accent); }
+    h1 { margin: 20px 0 14px; font-size: clamp(3rem, 7vw, 6.4rem); line-height: .92; letter-spacing: -.075em; max-width: 800px; }
+    .hero-sub { margin:0; max-width: 700px; color: #b7c0ce; font-size: clamp(1rem, 1.6vw, 1.18rem); }
+    .hero-sub strong { color: var(--text); }
+    .hero-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:28px; }
+    .btn { display:inline-flex; align-items:center; justify-content:center; gap:9px; min-height:44px; padding:0 15px; border-radius:13px; border:1px solid var(--line); font-weight:800; font-size:.9rem; transition:transform .18s ease, background .18s ease, border-color .18s ease; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--accent); color:#081006; border-color: transparent; }
+    .btn-ghost { background: rgba(255,255,255,.035); color:var(--text); }
+    .btn-ghost:hover { background: rgba(255,255,255,.08); }
+    .hero-metrics { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:28px; }
+    .metric { padding:14px 15px; border:1px solid var(--line); border-radius:15px; background: rgba(255,255,255,.025); }
+    .metric b { display:block; font-size:1.3rem; letter-spacing:-.04em; }
+    .metric span { color:var(--muted); font-size:.78rem; }
+
+    .terminal { height:100%; border-radius:24px; padding:20px; background:#070a0f; border:1px solid rgba(255,255,255,.08); display:flex; flex-direction:column; }
+    .terminal-bar { display:flex; gap:6px; margin-bottom:17px; }
+    .terminal-bar span { width:9px; height:9px; border-radius:50%; background:#343b48; }
+    .terminal .line { font-family:"SFMono-Regular",Consolas,monospace; font-size:.82rem; margin:7px 0; color:#a8b2c1; }
+    .terminal .green { color:var(--accent); }
+    .terminal .blue { color:var(--accent-2); }
+    .terminal .pink { color:#ff8ba5; }
+    .terminal .dim { color:#5c6778; }
+    .prompt { margin-top:auto; padding-top:20px; border-top:1px solid rgba(255,255,255,.07); color:#788394; font-family:"SFMono-Regular",Consolas,monospace; }
+
+    section { padding: 42px 0; }
+    .section-head { display:flex; justify-content:space-between; gap:18px; align-items:end; margin-bottom:20px; }
+    .kicker { color:var(--accent); text-transform:uppercase; letter-spacing:.12em; font-size:.68rem; font-weight:800; }
+    h2 { font-size:clamp(1.8rem,3vw,2.7rem); line-height:1.05; margin:6px 0 0; letter-spacing:-.055em; }
+    .section-note { max-width:500px; margin:0; color:var(--muted); font-size:.92rem; }
+
+    .about-grid { display:grid; grid-template-columns: .9fr 1.1fr; gap:18px; }
+    .section-card { padding:25px; border-radius:var(--radius); }
+    .quote { font-size:1rem; line-height:1.4; font-weight:800; letter-spacing:normal; margin:0 0 18px; }
+    .muted { color:var(--muted); }
+    .facts { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:18px; }
+    .fact { padding:13px; border-radius:14px; border:1px solid var(--line); }
+    .fact b { display:block; font-size:.82rem; }
+    .fact span { color:var(--muted); font-size:.78rem; }
+
+    .skill-toolbar { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; }
+    .filter { border:1px solid var(--line); background: rgba(255,255,255,.035); color:var(--muted); padding:8px 11px; border-radius:11px; font-size:.77rem; font-weight:800; }
+    .filter.active, .filter:hover { color:#081006; background:var(--accent); border-color:transparent; }
+    .skills-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+    .skill-card { border:1px solid var(--line); background:var(--panel); border-radius:18px; padding:19px; min-height:220px; transition: transform .18s ease, border-color .18s ease, opacity .18s ease; }
+    .skill-card.hidden { display:none; }
+    .skill-card:hover { transform: translateY(-3px); border-color: rgba(157,255,90,.25); }
+    .skill-top { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+    .skill-icon { width:34px; height:34px; display:grid; place-items:center; border-radius:10px; background:rgba(157,255,90,.09); color:var(--accent); font-weight:900; }
+    .level { font-size:.67rem; color:var(--muted); padding:5px 7px; border:1px solid var(--line); border-radius:999px; }
+    .skill-card h3 { margin:16px 0 8px; font-size:1rem; }
+    .chips { display:flex; flex-wrap:wrap; gap:7px; }
+    .chip { font-size:.72rem; color:#cbd2dc; border:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.025); padding:6px 8px; border-radius:8px; }
+
+
+    .timeline { display:grid; gap:12px; }
+    .timeline-card { border-radius:18px; padding:20px; display:grid; grid-template-columns:150px 1fr; gap:20px; }
+    .time { color:var(--accent); font-family:"SFMono-Regular",Consolas,monospace; font-size:.76rem; }
+    .timeline-card h3 { margin:0 0 6px; font-size:1rem; }
+    .timeline-card p { margin:0; color:var(--muted); font-size:.82rem; }
+
+    .edu-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+    .edu { padding:20px; border-radius:18px; border:1px solid var(--line); background:var(--panel); }
+    .edu b { display:block; font-size:.9rem; margin-bottom:4px; }
+    .edu span { font-size:.77rem; color:var(--muted); }
+
+    .contact { padding-bottom:75px; }
+    .contact-card { padding:33px; border-radius:26px; background:linear-gradient(135deg, rgba(157,255,90,.13), rgba(89,214,255,.08)); border:1px solid rgba(157,255,90,.18); display:flex; justify-content:space-between; gap:24px; align-items:center; }
+    .contact-card h2 { max-width:650px; }
+    .contact-actions { display:flex; flex-wrap:wrap; gap:9px; justify-content:flex-end; }
+    footer { padding:22px 0 35px; color:#6f7a8b; font-size:.72rem; border-top:1px solid var(--line); }
+    footer .foot { display:flex; justify-content:space-between; gap:15px; }
+
+    @media (max-width: 920px) {
+      .hero-grid, .about-grid { grid-template-columns:1fr; }
+      .skills-grid { grid-template-columns:repeat(2,1fr); }
+    }
+    @media (max-width: 700px) {
+      .container { width:min(calc(100% - 24px), var(--max)); }
+      nav { min-height:64px; }
+      .nav-links a { display:none; }
+      .hero { padding-top:34px; }
+      .hero-main { padding:25px; }
+      h1 { font-size: clamp(2.9rem, 17vw, 4.4rem); }
+      .hero-metrics { grid-template-columns:1fr; }
+      .skills-grid, .edu-grid { grid-template-columns:1fr; }
+      .timeline-card { grid-template-columns:1fr; gap:7px; }
+      .section-head, .contact-card, footer .foot { flex-direction:column; align-items:flex-start; }
+      .contact-actions { justify-content:flex-start; }
+      .facts { grid-template-columns:1fr; }
+    }
+    @media print {
+      body { background:#fff; color:#111; }
+      .nav-wrap, .hero-side, .skill-toolbar, .hero-actions, .contact-actions { display:none !important; }
+      .hero-main, .section-card, .skill-card, .timeline-card, .edu { box-shadow:none; background:#fff; border-color:#ddd; }
+      .muted, .section-note, .hero-sub, .timeline-card p, .edu span, footer { color:#444; }
+      .chip, .mini { color:#111; border-color:#ddd; background:#fff; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#content">Перейти к содержимому</a>
+  <header class="nav-wrap">
+    <div class="container">
+      <nav aria-label="Основная навигация">
+        <a class="brand" href="#top" aria-label="На главную">
+          <span class="brand-mark">JS</span>
+          <span>Никита Михайлович</span>
+        </a>
+        <div class="nav-links">
+          <a href="#about">Обо мне</a>
+          <a href="#skills">Навыки</a>
+          <a href="#experience">Подготовка</a>
+          <a href="#contact">Контакты</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="content">
+    <section class="hero" id="top">
+      <div class="container hero-grid">
+        <div class="hero-main">
+          <span class="eyebrow"><span class="status-dot"></span> Junior Frontend Developer · открыт к предложениям</span>
+          <h1>Никита<br><span style="color:var(--accent)">Михайлович</span></h1>
+          <p class="hero-sub"><strong>Junior JavaScript Developer</strong> с фокусом на frontend-разработке. Основной стек: JavaScript, TypeScript, React, HTML и CSS. Ищу первую коммерческую позицию, где смогу приносить пользу команде и быстро расти в инженерных компетенциях.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#skills">Смотреть навыки ↗</a>
+            <a class="btn btn-ghost" href="#contact">Связаться</a>
+          </div>
+          <div class="hero-metrics">
+            <div class="metric"><b>JS / TS</b><span>современный JavaScript и типизация</span></div>
+            <div class="metric"><b>React</b><span>компоненты, hooks, state, forms</span></div>
+            <div class="metric"><b>Frontend</b><span>HTML, CSS, API</span></div>
+          </div>
+        </div>
+        <aside class="hero-side" aria-label="Профиль разработчика">
+          <div class="terminal">
+            <div class="terminal-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+            <div class="line"><span class="dim">$</span> <span class="green">whoami</span></div>
+            <div class="line">nikita@frontend:~$ junior_js</div>
+            <div class="line">focus: <span class="blue">frontend engineering</span></div>
+            <div class="line">stack: <span class="green">JS TS React Vite</span></div>
+            <div class="line">quality: <span class="pink">tests + a11y + perf</span></div>
+            <div class="line">workflow: <span class="blue">Git · PR · CI</span></div>
+            <div class="line dim">------------------------------------------------</div>
+            <div class="line">status: <span class="green">ready to ship</span></div>
+            <div class="prompt">~/portfolio $ <span class="green">npm run build</span><span class="dim">_</span></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-head">
+          <div><div class="kicker">01 / profile</div><h2>Профиль кандидата</h2></div>
+          <p class="section-note">Фокус - современная frontend-разработка на JavaScript / TypeScript с React и пониманием веб-платформы.</p>
+        </div>
+        <div class="about-grid">
+          <article class="section-card">
+            <p class="quote">«Пишу понятный код, разбираюсь в причинах проблемы и довожу задачу до рабочего результата.»</p>
+            <p class="muted">Фокусируюсь на компонентном подходе, семантической разметке, предсказуемом состоянии интерфейса, работе с API и качестве пользовательского опыта.</p>
+            <div class="facts">
+              <div class="fact"><b>Командная работа</b><span>Git, ветки, pull request, code review</span></div>
+              <div class="fact"><b>Отладка</b><span>DevTools, Console, Network, Performance</span></div>
+              <div class="fact"><b>Качество</b><span>тестирование, производительность</span></div>
+              <div class="fact"><b>Развитие</b><span>документация, практика и системное изучение технологий</span></div>
+            </div>
+          </article>
+          <article class="section-card">
+            <p style="margin:0 0 12px; font-weight:800;">Цель</p>
+            <p class="muted" style="margin-top:0;">Получить первую коммерческую позицию Junior JavaScript / Frontend Developer. Готов работать с существующим кодом, разбираться в проектной документации, исправлять ошибки, развивать интерфейсы и постепенно брать на себя более сложные задачи.</p>
+            <div class="chips">
+              <span class="chip">Frontend</span><span class="chip">SPA</span><span class="chip">REST API</span><span class="chip">Responsive</span><span class="chip">Performance</span><span class="chip">Testing</span><span class="chip">Git</span><span class="chip">Code review</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="container">
+        <div class="section-head">
+          <div><div class="kicker">02 / skill matrix</div><h2>Навыки Junior JS Developer · 2026</h2></div>
+          <p class="section-note">Основные компетенции, инструменты и технологии, которые востребованы в современной frontend-разработке.</p>
+        </div>
+        <div class="skill-toolbar" role="toolbar" aria-label="Фильтр навыков">
+          <button class="filter active" data-filter="all" type="button">Все</button>
+          <button class="filter" data-filter="core" type="button">Core Web</button>
+          <button class="filter" data-filter="js" type="button">JS / TS</button>
+          <button class="filter" data-filter="react" type="button">React</button>
+          <button class="filter" data-filter="quality" type="button">Quality</button>
+          <button class="filter" data-filter="tools" type="button">Tools</button>
+        </div>
+        <div class="skills-grid">
+          <article class="skill-card" data-group="core">
+            <div class="skill-top"><div class="skill-icon">WEB</div><span class="level">CORE</span></div>
+            <h3>HTML / CSS</h3>
+            <div class="chips"><span class="chip">semantic HTML</span><span class="chip">forms</span><span class="chip">Flexbox</span><span class="chip">Grid</span><span class="chip">responsive layout</span><span class="chip">media queries</span><span class="chip">CSS variables</span></div>
+          </article>
+          <article class="skill-card" data-group="js">
+            <div class="skill-top"><div class="skill-icon">JS</div><span class="level">CORE</span></div>
+            <h3>JavaScript</h3>
+            <div class="chips"><span class="chip">ES6+</span><span class="chip">DOM</span><span class="chip">events</span><span class="chip">async / await</span><span class="chip">Promise</span><span class="chip">modules</span><span class="chip">Web API</span><span class="chip">error handling</span></div>
+          </article>
+          <article class="skill-card" data-group="js">
+            <div class="skill-top"><div class="skill-icon">TS</div><span class="level">WORKING</span></div>
+            <h3>TypeScript</h3>
+            <div class="chips"><span class="chip">types</span><span class="chip">interfaces</span><span class="chip">generics</span><span class="chip">unions</span><span class="chip">type guards</span><span class="chip">utility types</span><span class="chip">tsconfig</span></div>
+          </article>
+          <article class="skill-card" data-group="react">
+            <div class="skill-top"><div class="skill-icon">R</div><span class="level">WORKING</span></div>
+            <h3>React</h3>
+            <div class="chips"><span class="chip">components</span><span class="chip">JSX</span><span class="chip">Hooks</span><span class="chip">props</span><span class="chip">state</span><span class="chip">Context</span><span class="chip">forms</span></div>
+          </article>
+          <article class="skill-card" data-group="core">
+            <div class="skill-top"><div class="skill-icon">API</div><span class="level">CORE</span></div>
+            <h3>HTTP / REST API</h3>
+            <div class="chips"><span class="chip">HTTP methods</span><span class="chip">status codes</span><span class="chip">fetch</span><span class="chip">JSON</span><span class="chip">CRUD</span><span class="chip">async requests</span><span class="chip">DevTools Network</span></div>
+          </article>
+          <article class="skill-card" data-group="quality">
+            <div class="skill-top"><div class="skill-icon">T</div><span class="level">BASIC</span></div>
+            <h3>Testing</h3>
+            <div class="chips"><span class="chip">unit tests</span><span class="chip">Vitest basics</span><span class="chip">test cases</span><span class="chip">mocks</span><span class="chip">assertions</span><span class="chip">bug reproduction</span></div>
+          </article>
+          <article class="skill-card" data-group="quality">
+            <div class="skill-top"><div class="skill-icon">⚡</div><span class="level">BASIC</span></div>
+            <h3>Performance</h3>
+            <div class="chips"><span class="chip">DevTools</span><span class="chip">Network</span><span class="chip">lazy loading</span><span class="chip">code splitting</span><span class="chip">image optimization</span><span class="chip">rendering</span></div>
+          </article>
+          <article class="skill-card" data-group="tools">
+            <div class="skill-top"><div class="skill-icon">GIT</div><span class="level">CORE</span></div>
+            <h3>Git / collaboration</h3>
+            <div class="chips"><span class="chip">clone</span><span class="chip">branch</span><span class="chip">merge</span><span class="chip">rebase basics</span><span class="chip">stash</span><span class="chip">pull / push</span><span class="chip">code review</span></div>
+          </article>
+          <article class="skill-card" data-group="tools">
+            <div class="skill-top"><div class="skill-icon">V</div><span class="level">WORKING</span></div>
+            <h3>Tooling</h3>
+            <div class="chips"><span class="chip">Vite</span><span class="chip">npm</span><span class="chip">package.json</span><span class="chip">ESLint</span><span class="chip">Prettier</span><span class="chip">env vars</span><span class="chip">build / preview</span></div>
+          </article>
+          <article class="skill-card" data-group="tools">
+            <div class="skill-top"><div class="skill-icon">NODE</div><span class="level">BASIC</span></div>
+            <h3>Node.js / backend basics</h3>
+            <div class="chips"><span class="chip">Node.js</span><span class="chip">Express/Fastify basics</span><span class="chip">HTTP</span><span class="chip">env vars</span><span class="chip">REST endpoints</span><span class="chip">npm scripts</span></div>
+          </article>
+          <article class="skill-card" data-group="tools">
+            <div class="skill-top"><div class="skill-icon">SQL</div><span class="level">BASIC</span></div>
+            <h3>Data / databases</h3>
+            <div class="chips"><span class="chip">SQL basics</span><span class="chip">CRUD</span><span class="chip">relations</span><span class="chip">indexes basics</span><span class="chip">PostgreSQL basics</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+    <section id="experience">
+      <div class="container">
+        <div class="section-head">
+          <div><div class="kicker">03 / experience</div><h2>Профессиональная подготовка</h2></div>
+          <p class="section-note">Коммерческого опыта пока нет; профиль ориентирован на первую Junior-позицию.</p>
+        </div>
+        <div class="timeline">
+          <article class="timeline-card"><div class="time">Сейчас</div><div><h3>Подготовка к первой коммерческой позиции</h3><p>Системно развиваю навыки JavaScript, TypeScript и React; изучаю архитектуру frontend-приложений, работу с REST API, тестирование, Git и производительность.</p></div></article>
+          <article class="timeline-card"><div class="time">Практика</div><div><h3>Frontend-разработка</h3><p>Отрабатываю работу с DOM, асинхронностью, формами, состоянием, компонентами, HTTP/API, адаптивной вёрсткой и отладкой в браузерных DevTools.</p></div></article>
+          <article class="timeline-card"><div class="time">Цель</div><div><h3>Рост в продуктовой команде</h3><p>Готов начать с задач по поддержке и развитию интерфейсов, быстро погрузиться в кодовую базу и постепенно расширять ответственность.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head">
+          <div><div class="kicker">04 / education</div><h2>Образование</h2></div>
+          <p class="section-note">Техническое образование и последовательная профессиональная подготовка в frontend-разработке.</p>
+        </div>
+        <div class="edu-grid">
+          <article class="edu"><b>Нижегородский радиотехнический колледж</b><span>2018 - 2022 · среднее профессиональное образование</span><p class="muted" style="margin:10px 0 0;font-size:.8rem;">За время обучения сформировал системное инженерное мышление, внимательность к техническим деталям, дисциплину и привычку работать с документацией и техническими задачами.</p></article>
+          <article class="edu"><b>JavaScript / TypeScript</b><span>Самостоятельная профессиональная подготовка</span><p class="muted" style="margin:10px 0 0;font-size:.8rem;">ES6+, асинхронность, Promise, модули, DOM, Web API, типизация, generics, type guards.</p></article>
+          <article class="edu"><b>React и frontend-разработка</b><span>Самостоятельная профессиональная подготовка</span><p class="muted" style="margin:10px 0 0;font-size:.8rem;">Компоненты, Hooks, state management, формы, маршрутизация, работа с API и архитектура интерфейсов.</p></article>
+          <article class="edu"><b>Web standards и engineering workflow</b><span>Практическое развитие навыков</span><p class="muted" style="margin:10px 0 0;font-size:.8rem;">HTML, CSS, performance, HTTP, Git, Vite, ESLint, Prettier и базовое тестирование.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="container">
+        <div class="contact-card">
+          <div>
+            <div class="kicker">05 / contact</div>
+            <h2>Готов к собеседованию и первой коммерческой позиции.</h2>
+            <p class="muted">Готов обсудить вакансию и формат работы.</p>
+          </div>
+          <div class="contact-actions">
+            <a class="btn btn-primary" id="emailLink" href="mailto:nikitapolyashov2@gmail.com">nikitapolyashov2@gmail.com</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container foot"><span>© <span id="year"></span> Никита Михайлович · Junior JavaScript Developer</span><span>Frontend · JavaScript · TypeScript · React</span></div>
+  </footer>
+
+  <script>
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const filters = [...document.querySelectorAll('.filter')];
+    const cards = [...document.querySelectorAll('.skill-card')];
+    filters.forEach(button => button.addEventListener('click', () => {
+      filters.forEach(item => item.classList.remove('active'));
+      button.classList.add('active');
+      const value = button.dataset.filter;
+      cards.forEach(card => {
+        card.classList.toggle('hidden', value !== 'all' && card.dataset.group !== value);
+      });
+    }));
+
+  </script>
+</body>
+</html>
